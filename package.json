@@ -1,0 +1,26 @@
+{
+  "name": "pokemon-dict",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "node-sass": "./node_modules/node-sass/bin/node-sass"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/1490563/pokemon-dict.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/1490563/pokemon-dict/issues"
+  },
+  "homepage": "https://github.com/1490563/pokemon-dict#readme",
+  "dependencies": {
+    "node-sass": "^7.0.3"
+  }
+}
