@@ -18,7 +18,7 @@ const renderPoke = (poke) => {
   pokeDivOuter.id = poke.name;
 
   const pokeDivInner = document.createElement("div");
-  pokeDivInner.className = "poke-div-inner";
+  pokeDivInner.className = `poke-div-inner-${poke.types[0].type.name}`;
 
   const pokeDivUpper = document.createElement("div");
   pokeDivUpper.className = "poke-div-upper";
@@ -45,12 +45,16 @@ const renderPoke = (poke) => {
   const pokeDivMiddle = document.createElement("div");
   pokeDivMiddle.className = "poke-div-middle";
 
+  const pokeImageFlame = document.createElement("div");
+  pokeImageFlame.className = "poke-image-flame";
+
   const pokeImage = document.createElement("img");
   pokeImage.className = "poke-image";
 
   fetchPokeImage(poke.id, pokeImage);
 
-  pokeDivMiddle.append(pokeImage);
+  pokeImageFlame.append(pokeImage);
+  pokeDivMiddle.append(pokeImageFlame);
 
   const pokeDivBottom = document.createElement("div");
   pokeDivBottom.className = "poke-div-bottom";
@@ -77,7 +81,7 @@ const renderPoke = (poke) => {
   const pokeBottom = document.createElement("div");
   pokeBottom.className = "poke-bottom";
 
-  pokeBottom.append(pokeHeight, pokeWeight)
+  pokeBottom.append(pokeHeight, pokeWeight);
 
   pokeDivBottom.append(pokeType, pokeBottom);
 
