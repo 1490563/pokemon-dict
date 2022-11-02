@@ -5,7 +5,30 @@ window.app = () => {
   pokeListDiv.id = "poke-list-div";
   main.append(pokeListDiv);
 
-  fetchPokeNameListByGeneration(2).then((pokeNameList) => {
+  let generationNumber;
+  if(document.getElementById("generation").value === "GenerationⅠ"){
+    generationNumber = 1;
+  }else if(document.getElementById("generation").value === "GenerationⅡ"){
+    generationNumber = 2;
+  }else if(document.getElementById("generation").value === "GenerationⅢ"){
+    generationNumber = 3;
+  }else if(document.getElementById("generation").value === "GenerationⅣ"){
+    generationNumber = 4;
+  }else if(document.getElementById("generation").value === "GenerationⅤ"){
+    generationNumber = 5;
+  }else if(document.getElementById("generation").value === "GenerationⅥ"){
+    generationNumber = 6;
+  }else if(document.getElementById("generation").value === "GenerationⅦ"){
+    generationNumber = 7;
+  }else if(document.getElementById("generation").value === "GenerationⅧ"){
+    generationNumber = 8;
+  }else {
+    
+  };
+  console.log(document.getElementById("generation").value);
+  console.log(generationNumber);
+
+  fetchPokeNameListByGeneration(generationNumber).then((pokeNameList) => {
     for (const pokeName of pokeNameList) {
       fetchPoke(pokeName).then((poke) => renderPoke(poke));
     }
@@ -28,11 +51,12 @@ const renderPoke = (poke) => {
 
   const pokeGeneration = document.createElement("div");
   pokeGeneration.className = "poke-generation";
-  pokeGeneration.innerText = "###";
+  pokeGeneration.innerText = document.getElementById("generation").value;
+  // console.log(document.getElementById("generation").value)
 
   const pokeNo = document.createElement("div");
   pokeNo.className = "poke-no";
-  pokeNo.innerText = poke.id;
+  pokeNo.innerText = "No. " + poke.id;
 
   pokeHeader.append(pokeGeneration, pokeNo);
 
@@ -72,11 +96,11 @@ const renderPoke = (poke) => {
 
   const pokeHeight = document.createElement("div");
   pokeHeight.className = "poke-height";
-  pokeHeight.innerText = Number(poke.height) * 10 + " cm";
+  pokeHeight.innerText = "Height : " + Number(poke.height) * 10 + " cm";
 
   const pokeWeight = document.createElement("div");
   pokeWeight.className = "poke-weight";
-  pokeWeight.innerText = Number(poke.weight) / 10 + " kg";
+  pokeWeight.innerText = "Weight : " + Number(poke.weight) / 10 + " kg";
 
   const pokeBottom = document.createElement("div");
   pokeBottom.className = "poke-bottom";

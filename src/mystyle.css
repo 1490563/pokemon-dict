@@ -15,7 +15,10 @@ body {
 .poke-header {
   display: flex;
   align-items: center;
-  justify-content: space-between; }
+  justify-content: space-between;
+  padding: 5px 10px 0px 10px;
+  font-size: 16px;
+  font-family: 'Cherry Swash', cursive; }
 
 .poke-div-inner, .poke-div-inner-bug, .poke-div-inner-dark, .poke-div-inner-dragon, .poke-div-inner-electric, .poke-div-inner-fairy, .poke-div-inner-fighting, .poke-div-inner-fire, .poke-div-inner-flying, .poke-div-inner-ghost, .poke-div-inner-grass, .poke-div-inner-ground, .poke-div-inner-ice, .poke-div-inner-normal, .poke-div-inner-poison, .poke-div-inner-psychic, .poke-div-inner-rock, .poke-div-inner-steel, .poke-div-inner-water {
   background-color: #75d0f7;
@@ -26,7 +29,11 @@ body {
 .poke-name {
   display: block;
   text-align: center;
-  font-size: 25px; }
+  font-size: 25px;
+  font-family: 'Caveat', cursive;
+  font-weight: bold;
+  text-shadow: 1px 1px 2px silver;
+  font-style: italic; }
 
 .poke-div-middle {
   display: flex;
@@ -41,12 +48,18 @@ body {
   height: 180px; }
 
 .poke-type {
-  text-align: center; }
+  text-align: center;
+  font-size: 20px;
+  font-family: 'Londrina Shadow', cursive;
+  font-weight: bold; }
 
 .poke-bottom {
   display: flex;
   align-items: center;
-  justify-content: space-between; }
+  justify-content: space-between;
+  padding: 0px 10px;
+  font-size: 16px;
+  font-family: 'Cherry Swash', cursive; }
 
 .poke-div-inner-bug {
   background-image: url("../images/bug.png"); }
