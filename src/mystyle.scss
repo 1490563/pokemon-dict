@@ -21,6 +21,9 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  padding: 5px 10px 0px 10px;
+  font-size: 16px;
+  font-family: 'Cherry Swash', cursive;
 }
 
 .poke-div-inner {
@@ -33,7 +36,11 @@ body {
 .poke-name {
   display: block;
   text-align: center;
-  font-size:  25px;;
+  font-size:  25px;
+  font-family: 'Caveat', cursive;
+  font-weight: bold;
+  text-shadow: 1px 1px 2px silver;
+  font-style: italic;
 }
 
 .poke-div-middle {
@@ -53,12 +60,18 @@ body {
 
 .poke-type {
   text-align: center;
+  font-size: 20px;
+  font-family: 'Londrina Shadow', cursive;
+  font-weight: bold;
 }
 
 .poke-bottom {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    padding: 0px 10px;
+    font-size: 16px;
+    font-family: 'Cherry Swash', cursive;
 }
 
 .poke-div-inner-bug {
