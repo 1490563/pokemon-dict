@@ -14,6 +14,7 @@ body {
   margin: 20px;
   box-shadow: 1px 2px 2px 2px #ccc, 0px 4px 2px 3px #ddd;
   padding: 10px;
+  
 }
 
 .poke-header {
@@ -24,21 +25,30 @@ body {
 
 .poke-div-inner {
   background-color: #75d0f7;
-  background-image: url("../images/fire.png");
   width: auto;
   height: 100%;
   box-shadow: 1px 1px 2px 1px #666 inset;
 }
-
+                                  
 .poke-name {
   display: block;
   text-align: center;
   font-size:  25px;;
 }
 
+.poke-div-middle {
+    display: flex;
+    justify-content: space-around;
+}
+
+.poke-image-flame {
+    background-color: white;
+    padding: 0 20px 0 20px;
+}
+
 .poke-image {
-  max-width: 100%;
-  height: auto;
+  width: auto;
+  height: 180px;
 }
 
 .poke-type {
@@ -49,4 +59,94 @@ body {
     display: flex;
     align-items: center;
     justify-content: space-between;
-  }
+}
+
+.poke-div-inner-bug {
+@extend .poke-div-inner;
+background-image: url("../images/bug.png");
+}
+
+.poke-div-inner-dark {
+@extend .poke-div-inner;
+background-image: url("../images/dark.png");
+}
+
+.poke-div-inner-dragon {
+@extend .poke-div-inner;
+background-image: url("../images/dragon.png");
+}
+
+.poke-div-inner-electric {
+@extend .poke-div-inner;
+background-image: url("../images/electric.png");
+}
+
+.poke-div-inner-fairy {
+@extend .poke-div-inner;
+background-image: url("../images/fairy.png");
+}
+
+.poke-div-inner-fighting {
+@extend .poke-div-inner;
+background-image: url("../images/fighting.png");
+}
+
+.poke-div-inner-fire {
+@extend .poke-div-inner;
+background-image: url("../images/fire.png");
+}
+
+.poke-div-inner-flying {
+@extend .poke-div-inner;
+background-image: url("../images/flying.png");
+}
+
+.poke-div-inner-ghost {
+@extend .poke-div-inner;
+background-image: url("../images/ghost.png");
+}
+
+.poke-div-inner-grass {
+@extend .poke-div-inner;
+background-image: url("../images/grass.png");
+}
+
+.poke-div-inner-ground {
+@extend .poke-div-inner;
+background-image: url("../images/ground.png");
+}
+
+.poke-div-inner-ice {
+@extend .poke-div-inner;
+background-image: url("../images/ice.png");
+}
+
+.poke-div-inner-normal {
+@extend .poke-div-inner;
+background-image: url("../images/normal.png");
+}
+
+.poke-div-inner-poison {
+@extend .poke-div-inner;
+background-image: url("../images/poison.png");
+}
+
+.poke-div-inner-psychic {
+@extend .poke-div-inner;
+background-image: url("../images/psychic.png");
+}
+
+.poke-div-inner-rock {
+@extend .poke-div-inner;
+background-image: url("../images/rock.png");
+}
+
+.poke-div-inner-steel {
+@extend .poke-div-inner;
+background-image: url("../images/steel.png");
+}
+
+.poke-div-inner-water {
+@extend .poke-div-inner;
+background-image: url("../images/water.png");
+}
