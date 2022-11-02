@@ -3,6 +3,7 @@ body {
 
 .poke-div-outer {
   background-color: #ffe162;
+  background-image: url("../images/outer_background.png");
   border: 0;
   width: 250px;
   height: 350px;
@@ -18,9 +19,10 @@ body {
 
 .poke-div-inner {
   background-color: #75d0f7;
+  background-image: url("../images/fire.png");
   width: auto;
   height: 100%;
-  box-shadow: 1px 1px 2px 1px #999 inset; }
+  box-shadow: 1px 1px 2px 1px #666 inset; }
 
 .poke-name {
   display: block;
