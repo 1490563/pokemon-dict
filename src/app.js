@@ -74,7 +74,12 @@ const renderPoke = (poke) => {
   pokeWeight.className = "poke-weight";
   pokeWeight.innerText = Number(poke.weight) / 10 + " kg";
 
-  pokeDivBottom.append(pokeType, pokeHeight, pokeWeight);
+  const pokeBottom = document.createElement("div");
+  pokeBottom.className = "poke-bottom";
+
+  pokeBottom.append(pokeHeight, pokeWeight)
+
+  pokeDivBottom.append(pokeType, pokeBottom);
 
   pokeDivInner.append(pokeDivUpper, pokeDivMiddle, pokeDivBottom);
   pokeDivOuter.append(pokeDivInner);
