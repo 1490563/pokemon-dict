@@ -61,6 +61,9 @@ body {
   font-size: 16px;
   font-family: 'Cherry Swash', cursive; }
 
+.poke-text {
+  font-size: 6px; }
+
 .poke-div-inner-bug {
   background-image: url("../images/bug.png"); }
 

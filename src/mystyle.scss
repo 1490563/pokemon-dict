@@ -74,6 +74,10 @@ body {
     font-family: 'Cherry Swash', cursive;
 }
 
+.poke-text {
+    font-size: 6px;
+}
+
 .poke-div-inner-bug {
 @extend .poke-div-inner;
 background-image: url("../images/bug.png");

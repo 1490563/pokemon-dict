@@ -5,30 +5,30 @@ window.app = () => {
   pokeListDiv.id = "poke-list-div";
   main.append(pokeListDiv);
 
-  let generationNumber;
-  if(document.getElementById("generation").value === "GenerationⅠ"){
-    generationNumber = 1;
-  }else if(document.getElementById("generation").value === "GenerationⅡ"){
-    generationNumber = 2;
-  }else if(document.getElementById("generation").value === "GenerationⅢ"){
-    generationNumber = 3;
-  }else if(document.getElementById("generation").value === "GenerationⅣ"){
-    generationNumber = 4;
-  }else if(document.getElementById("generation").value === "GenerationⅤ"){
-    generationNumber = 5;
-  }else if(document.getElementById("generation").value === "GenerationⅥ"){
-    generationNumber = 6;
-  }else if(document.getElementById("generation").value === "GenerationⅦ"){
-    generationNumber = 7;
-  }else if(document.getElementById("generation").value === "GenerationⅧ"){
-    generationNumber = 8;
-  }else {
+  // let generationNumber;
+  // if(document.getElementById("generation").value === "GenerationⅠ"){
+  //   generationNumber = 1;
+  // }else if(document.getElementById("generation").value === "GenerationⅡ"){
+  //   generationNumber = 2;
+  // }else if(document.getElementById("generation").value === "GenerationⅢ"){
+  //   generationNumber = 3;
+  // }else if(document.getElementById("generation").value === "GenerationⅣ"){
+  //   generationNumber = 4;
+  // }else if(document.getElementById("generation").value === "GenerationⅤ"){
+  //   generationNumber = 5;
+  // }else if(document.getElementById("generation").value === "GenerationⅥ"){
+  //   generationNumber = 6;
+  // }else if(document.getElementById("generation").value === "GenerationⅦ"){
+  //   generationNumber = 7;
+  // }else if(document.getElementById("generation").value === "GenerationⅧ"){
+  //   generationNumber = 8;
+  // }else {
     
-  };
-  console.log(document.getElementById("generation").value);
-  console.log(generationNumber);
+  // };
+  // console.log(document.getElementById("generation").value);
+  // console.log(generationNumber);
 
-  fetchPokeNameListByGeneration(generationNumber).then((pokeNameList) => {
+  fetchPokeNameListByGeneration(3).then((pokeNameList) => {
     for (const pokeName of pokeNameList) {
       fetchPoke(pokeName).then((poke) => renderPoke(poke));
     }
@@ -104,10 +104,15 @@ const renderPoke = (poke) => {
 
   const pokeBottom = document.createElement("div");
   pokeBottom.className = "poke-bottom";
-
+  
   pokeBottom.append(pokeHeight, pokeWeight);
 
-  pokeDivBottom.append(pokeType, pokeBottom);
+  const pokeText = document.createElement("div");
+  pokeText.className = "poke-text";
+
+  fetchPokeText(poke.id, pokeText);
+
+  pokeDivBottom.append(pokeType, pokeBottom, pokeText);
 
   pokeDivInner.append(pokeDivUpper, pokeDivMiddle, pokeDivBottom);
   pokeDivOuter.append(pokeDivInner);
@@ -137,6 +142,7 @@ const fetchPokeNameListByGeneration = (id) => {
   return fetch(`https://pokeapi.co/api/v2/generation/${id}/`)
     .then((response) => response.json())
     .then((data) => data.pokemon_species.map((element) => element.name))
+    // .then(pokes => console.log(pokes));
     .catch((response) => response.json());
 };
 
@@ -149,4 +155,17 @@ const fetchPokeImage = (id, pokeImage) => {
       const fileURL = URL.createObjectURL(blobResponse);
       pokeImage.src = fileURL;
     });
+};
+
+const fetchPokeText = (id, pokeText) => {
+  return fetch(
+    `https://pokeapi.co/api/v2/pokemon-species/${id}/`
+  )
+    .then((response) => response.json())
+    // .then((data) => data.flavor_text_entries)
+    .then((data) => {
+      const pokeTextsrc = data.flavor_text_entries[0].flavor_text
+      pokeText.innerText = pokeTextsrc;
+    })
+    // .then(text => console.log(text));
 };
