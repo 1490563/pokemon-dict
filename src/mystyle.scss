@@ -41,6 +41,7 @@ body {
   font-weight: bold;
   text-shadow: 1px 1px 2px silver;
   font-style: italic;
+  letter-spacing: 0.2em;
 }
 
 .poke-div-middle {
@@ -51,11 +52,12 @@ body {
 .poke-image-flame {
     background-color: white;
     padding: 0 20px 0 20px;
+    height: 170px;
 }
 
 .poke-image {
   width: auto;
-  height: 180px;
+  height: 170px;
 }
 
 .poke-type {
@@ -63,6 +65,8 @@ body {
   font-size: 20px;
   font-family: 'Londrina Shadow', cursive;
   font-weight: bold;
+  letter-spacing: 0.1em;
+
 }
 
 .poke-bottom {
@@ -74,9 +78,21 @@ body {
     font-family: 'Cherry Swash', cursive;
 }
 
-.poke-text {
-    font-size: 6px;
+.poke-text-box {
+    height: 55px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
+
+.poke-text {
+    font-size: 3px;
+    padding: 0px 5px;
+    font-family: "fantasy", cursive;
+    text-align: center;
+}
+
+
 
 .poke-div-inner-bug {
 @extend .poke-div-inner;
