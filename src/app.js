@@ -28,7 +28,7 @@ window.app = () => {
   // console.log(document.getElementById("generation").value);
   // console.log(generationNumber);
 
-  fetchPokeNameListByGeneration(3).then((pokeNameList) => {
+  fetchPokeNameListByGeneration(5).then((pokeNameList) => {
     for (const pokeName of pokeNameList) {
       fetchPoke(pokeName).then((poke) => renderPoke(poke));
     }
@@ -96,7 +96,7 @@ const renderPoke = (poke) => {
 
   const pokeHeight = document.createElement("div");
   pokeHeight.className = "poke-height";
-  pokeHeight.innerText = "Height : " + Number(poke.height) * 10 + " cm";
+  pokeHeight.innerText = "Height : " + Number(poke.height) / 10 + " m";
 
   const pokeWeight = document.createElement("div");
   pokeWeight.className = "poke-weight";
@@ -107,12 +107,17 @@ const renderPoke = (poke) => {
   
   pokeBottom.append(pokeHeight, pokeWeight);
 
+  const pokeTextBox = document.createElement("div");
+  pokeTextBox.className = "poke-text-box";
+
   const pokeText = document.createElement("div");
   pokeText.className = "poke-text";
 
   fetchPokeText(poke.id, pokeText);
 
-  pokeDivBottom.append(pokeType, pokeBottom, pokeText);
+  pokeTextBox.append(pokeText);
+
+  pokeDivBottom.append(pokeType, pokeBottom, pokeTextBox);
 
   pokeDivInner.append(pokeDivUpper, pokeDivMiddle, pokeDivBottom);
   pokeDivOuter.append(pokeDivInner);
@@ -164,8 +169,28 @@ const fetchPokeText = (id, pokeText) => {
     .then((response) => response.json())
     // .then((data) => data.flavor_text_entries)
     .then((data) => {
-      const pokeTextsrc = data.flavor_text_entries[0].flavor_text
-      pokeText.innerText = pokeTextsrc;
+      // const pokeTextsrc = data.flavor_text_entries[0].flavor_text
+      // pokeText.innerText = pokeTextsrc;
+
+      const pokeTextFlavors = data.flavor_text_entries
+      let pokeTextsrc = pokeTextFlavors
+      .filter(ele => (ele.language.name === "en") &&(ele.version.name ==="sword"));
+      if (pokeTextsrc.length === 0){
+        pokeTextsrc = pokeTextFlavors
+      .filter(ele => (ele.language.name === "en") &&(ele.version.name ==="y"));
+      }
+      if (pokeTextsrc.length === 0){
+        pokeTextsrc = pokeTextFlavors
+      .filter(ele => (ele.language.name === "en") &&(ele.version.name ==="sun"));
+      }
+      if (pokeTextsrc.length === 0){
+        pokeTextsrc = pokeTextFlavors
+      .filter(ele => (ele.language.name === "en") &&(ele.version.name ==="legends-arceus"));
+      }
+
+      console.log(pokeTextsrc[0].flavor_text)
+      pokeText.innerText = pokeTextsrc[0].flavor_text;
     })
+    // .then(text => console.log(text))
     // .then(text => console.log(text));
 };
