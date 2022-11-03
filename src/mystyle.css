@@ -1,13 +1,56 @@
 body {
-  background-color: #eff2f5; }
+  background-color: white;
+  margin: 0; }
+
+.top-menu {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 40px;
+  background-color: #eee;
+  margin: 0;
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  box-shadow: 1px 2px 2px 2px #ccc, 0px 4px 2px 3px #ddd; }
+
+.top-menu-brand {
+  margin-left: 10px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 16pt; }
 
 .main {
-  max-width: 870px; }
+  display: flex;
+  flex-direction: row;
+  flex-grow: 1;
+  margin: 60px 0px 20px 220px; }
+
+.side-bar {
+  background-color: #eee;
+  width: 200px;
+  min-width: 200px;
+  height: 100%;
+  position: fixed;
+  top: 40px;
+  left: 0px;
+  box-shadow: 1px 2px 2px 2px #ccc, 0px 4px 2px 3px #ddd; }
+
+.gene-name-of-p {
+  text-align: center;
+  margin: 20px 10px 20px 10px;
+  padding: 10px 5px 10px 5px;
+  font-weight: bold;
+  border-radius: 4px;
+  cursor: pointer; }
+
+.gene-name-of-p:hover {
+  background-color: white; }
 
 .poke-list-div {
   display: flex;
   justify-content: space-around;
-  flex-wrap: wrap; }
+  flex-wrap: wrap;
+  min-width: 870px; }
 
 .poke-div-outer {
   background-color: #ffe162;
@@ -26,7 +69,7 @@ body {
   justify-content: space-between;
   padding: 5px 5px 0px 5px;
   font-size: 15px;
-  font-family: 'Cherry Swash', cursive; }
+  font-family: "Cherry Swash", cursive; }
 
 .poke-div-inner, .poke-div-inner-bug, .poke-div-inner-dark, .poke-div-inner-dragon, .poke-div-inner-electric, .poke-div-inner-fairy, .poke-div-inner-fighting, .poke-div-inner-fire, .poke-div-inner-flying, .poke-div-inner-ghost, .poke-div-inner-grass, .poke-div-inner-ground, .poke-div-inner-ice, .poke-div-inner-normal, .poke-div-inner-poison, .poke-div-inner-psychic, .poke-div-inner-rock, .poke-div-inner-steel, .poke-div-inner-water {
   background-color: #75d0f7;
@@ -38,11 +81,11 @@ body {
   display: block;
   text-align: center;
   font-size: 23px;
-  font-family: 'Caveat', cursive;
+  font-family: "Caveat", cursive;
   font-weight: bold;
   text-shadow: 1px 1px 2px silver;
   font-style: italic;
-  background-image: linear-gradient(70deg, black 80%, #FFF 50%, #dc143c 55%);
+  background-image: linear-gradient(70deg, black 80%, #fff 50%, #dc143c 55%);
   background-size: 500% 100%;
   background-clip: text;
   -webkit-background-clip: text;
@@ -63,7 +106,9 @@ body {
 .poke-image-flame {
   background-color: white;
   padding: 0 20px 0 20px;
-  height: 160px; }
+  height: 160px;
+  background-image: url("../images/poke_back.png");
+  border-radius: 4px; }
 
 .poke-image {
   max-width: 160px;
@@ -72,7 +117,7 @@ body {
 .poke-type {
   text-align: center;
   font-size: 20px;
-  font-family: 'Londrina Shadow', cursive;
+  font-family: "Londrina Shadow", cursive;
   font-weight: bold;
   letter-spacing: 0.1em; }
 
@@ -82,7 +127,7 @@ body {
   justify-content: space-between;
   padding: 0px 10px;
   font-size: 16px;
-  font-family: 'Cherry Swash', cursive; }
+  font-family: "Cherry Swash", cursive; }
 
 .poke-text-box {
   height: 65px;
