@@ -1,6 +1,14 @@
 body {
   background-color: #eff2f5; }
 
+.main {
+  max-width: 870px; }
+
+.poke-list-div {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap; }
+
 .poke-div-outer {
   background-color: #ffe162;
   background-image: url("../images/outer_background.png");
@@ -8,7 +16,7 @@ body {
   width: 250px;
   height: 350px;
   border-radius: 8px;
-  margin: 20px;
+  margin: 10px;
   box-shadow: 1px 2px 2px 2px #ccc, 0px 4px 2px 3px #ddd;
   padding: 10px; }
 
@@ -29,18 +37,18 @@ body {
 .poke-name {
   display: block;
   text-align: center;
-  font-size: 25px;
+  font-size: 23px;
   font-family: 'Caveat', cursive;
   font-weight: bold;
   text-shadow: 1px 1px 2px silver;
   font-style: italic;
-  letter-spacing: 0.2em;
   background-image: linear-gradient(70deg, black 80%, #FFF 50%, #dc143c 55%);
   background-size: 500% 100%;
   background-clip: text;
   -webkit-background-clip: text;
   color: transparent;
-  animation: shine 2s infinite; }
+  animation: shine 2s infinite;
+  white-space: nowrap; }
 
 @keyframes shine {
   0% {
@@ -58,8 +66,8 @@ body {
   height: 160px; }
 
 .poke-image {
-  width: auto;
-  height: 160px; }
+  max-width: 160px;
+  max-height: 160px; }
 
 .poke-type {
   text-align: center;
@@ -83,7 +91,7 @@ body {
   align-items: center; }
 
 .poke-text {
-  font-size: 3px;
+  font-size: 6px;
   padding: 0px 5px;
   font-family: "fantasy", cursive;
   text-align: center; }
