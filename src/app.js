@@ -3,27 +3,42 @@
 window.app = () => {
   const main = document.getElementById("main");
 
-  const generationSelect = createGenerationSelect(main);
-  generationSelect.addEventListener("change", (event) =>
-    onGeneratonSelectChange(event)
-  );
-
   const pokeListDiv = document.createElement("div");
   pokeListDiv.className = "poke-list-div";
   pokeListDiv.id = "poke-list-div";
   main.append(pokeListDiv);
+
+  const sideBar = document.getElementById("side-bar");
+
+  const generationSelect = createGenerationSelect(sideBar);
+  generationSelect.addEventListener("change", (event) =>
+    onGeneratonSelectChange(event)
+  );
 };
 
+// const createGenerationButton = (side) => {
+//   const generationButton = document.createElement("div");
+//   generationButton.className = "generation-button";
+
+//   side.append(generationButton);
+// }
+
+
 const createGenerationSelect = (main) => {
-  const generationSelect = document.createElement("select");
+  // const generationSelect = document.createElement("select");
+  const generationSelect = document.createElement("div");
   generationSelect.className = "generation-select";
   main.append(generationSelect);
   fetchGenerationNameList().then((generationNameList) => {
     generationNameList.forEach((generationName) => {
-      const option = document.createElement("option");
-      option.innerText = generationName;
-      option.value = generationName;
-      generationSelect.append(option);
+      // const option = document.createElement("option");
+      const geneNameOfP = document.createElement("p");
+      geneNameOfP.className = "gene-name-of-p"
+      geneNameOfP.innerText = generationName.toUpperCase();
+      geneNameOfP.value = generationName;
+      geneNameOfP.addEventListener ("click", (event)=>
+      onGeneratonSelectChange(event)); 
+      generationSelect.append(geneNameOfP);
     });
   });
   return generationSelect;
@@ -76,7 +91,7 @@ const renderPoke = (poke, generationName) => {
 
   const pokeGeneration = document.createElement("div");
   pokeGeneration.className = "poke-generation";
-  pokeGeneration.innerText = generationName;
+  pokeGeneration.innerText = generationName.toUpperCase();
   // console.log(document.getElementById("generation").value)
 
   const pokeNo = document.createElement("div");

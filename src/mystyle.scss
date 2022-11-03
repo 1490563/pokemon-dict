@@ -1,18 +1,70 @@
 $normal-back-ground-color: #eff2f5;
 
 body {
-  background-color: $normal-back-ground-color;
+  background-color: white;
+  margin: 0;
+}
+
+.top-menu {
+  display: flex;
+  align-items: center;
+
+  width: 100%;
+  height: 40px;
+  background-color: #eee;
+  margin: 0;
+
+  position: fixed;
+  top: 0px;
+  left: 0px;
+
+  box-shadow: 1px 2px 2px 2px #ccc, 0px 4px 2px 3px #ddd;
+}
+
+.top-menu-brand {
+  margin-left: 10px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 16pt;
 }
 
 .main {
-    max-width: 870px;
+  display: flex;
+  flex-direction: row;
+  flex-grow: 1;
+  margin: 60px 0px 20px 220px;
+}
+
+.side-bar {
+  background-color: #eee;
+  width: 200px;
+  min-width: 200px;
+  height: 100%;
+
+  position: fixed;
+  top: 40px;
+  left: 0px;
+
+  box-shadow: 1px 2px 2px 2px #ccc, 0px 4px 2px 3px #ddd;
+}
+
+.gene-name-of-p {
+  text-align: center;
+  margin: 20px 10px 20px 10px;
+  padding: 10px 5px 10px 5px;
+  font-weight: bold;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.gene-name-of-p:hover {
+  background-color: white;
 }
 
 .poke-list-div {
-    display: flex;
-    justify-content: space-around;
-    flex-wrap: wrap;
-    
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  min-width: 870px;
 }
 
 .poke-div-outer {
@@ -20,7 +72,7 @@ body {
   background-image: url("../images/outer_background.png");
   border: 0;
   width: 250px;
-  height: 350px; 
+  height: 350px;
   border-radius: 8px;
   margin: 10px;
   box-shadow: 1px 2px 2px 2px #ccc, 0px 4px 2px 3px #ddd;
@@ -33,7 +85,7 @@ body {
   justify-content: space-between;
   padding: 5px 5px 0px 5px;
   font-size: 15px;
-  font-family: 'Cherry Swash', cursive;
+  font-family: "Cherry Swash", cursive;
 }
 
 .poke-div-inner {
@@ -42,47 +94,50 @@ body {
   height: 100%;
   box-shadow: 1px 1px 2px 1px #666 inset;
 }
-                                  
+
 .poke-name {
   display: block;
   text-align: center;
-  font-size:  23px;
-  font-family: 'Caveat', cursive;
+  font-size: 23px;
+  font-family: "Caveat", cursive;
   font-weight: bold;
   text-shadow: 1px 1px 2px silver;
   font-style: italic;
-//   letter-spacing: 0.1em;
+  //   letter-spacing: 0.1em;
   background-image: linear-gradient(
-		70deg,
-		black 80%, /* font color */
-		#FFF 50%,
-		#dc143c 55% /* font color */
-	);
-	background-size: 500% 100%;
-	background-clip: text;
-	-webkit-background-clip: text;
-	color: transparent;
-	animation: shine 2s infinite;
-    white-space: nowrap;
+    70deg,
+    black 80%,
+    /* font color */ #fff 50%,
+    #dc143c 55% /* font color */
+  );
+  background-size: 500% 100%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  animation: shine 2s infinite;
+  white-space: nowrap;
 }
 @keyframes shine {
-	0% {
-		background-position: 100% 50%;
-	}
-	100% {
-		background-position: 0% 50%;
-	}
+  0% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }
 
 .poke-div-middle {
-    display: flex;
-    justify-content: space-around;
+  display: flex;
+  justify-content: space-around;
 }
 
 .poke-image-flame {
-    background-color: white;
-    padding: 0 20px 0 20px;
-    height: 160px;
+  background-color: white;
+  padding: 0 20px 0 20px;
+  height: 160px;
+
+  background-image: url("../images/poke_back.png");
+  border-radius: 4px;
 }
 
 .poke-image {
@@ -93,123 +148,120 @@ body {
 .poke-type {
   text-align: center;
   font-size: 20px;
-  font-family: 'Londrina Shadow', cursive;
+  font-family: "Londrina Shadow", cursive;
   font-weight: bold;
   letter-spacing: 0.1em;
-
 }
 
 .poke-bottom {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0px 10px;
-    font-size: 16px;
-    font-family: 'Cherry Swash', cursive;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0px 10px;
+  font-size: 16px;
+  font-family: "Cherry Swash", cursive;
 }
 
 .poke-text-box {
-    height: 65px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  height: 65px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .poke-text {
-    font-size: 6px;
-    padding: 0px 5px;
-    font-family: "fantasy", cursive;
-    text-align: center;
+  font-size: 6px;
+  padding: 0px 5px;
+  font-family: "fantasy", cursive;
+  text-align: center;
 }
 
-
-
 .poke-div-inner-bug {
-@extend .poke-div-inner;
-background-image: url("../images/bug.png");
+  @extend .poke-div-inner;
+  background-image: url("../images/bug.png");
 }
 
 .poke-div-inner-dark {
-@extend .poke-div-inner;
-background-image: url("../images/dark.png");
+  @extend .poke-div-inner;
+  background-image: url("../images/dark.png");
 }
 
 .poke-div-inner-dragon {
-@extend .poke-div-inner;
-background-image: url("../images/dragon.png");
+  @extend .poke-div-inner;
+  background-image: url("../images/dragon.png");
 }
 
 .poke-div-inner-electric {
-@extend .poke-div-inner;
-background-image: url("../images/electric.png");
+  @extend .poke-div-inner;
+  background-image: url("../images/electric.png");
 }
 
 .poke-div-inner-fairy {
-@extend .poke-div-inner;
-background-image: url("../images/fairy.png");
+  @extend .poke-div-inner;
+  background-image: url("../images/fairy.png");
 }
 
 .poke-div-inner-fighting {
-@extend .poke-div-inner;
-background-image: url("../images/fighting.png");
+  @extend .poke-div-inner;
+  background-image: url("../images/fighting.png");
 }
 
 .poke-div-inner-fire {
-@extend .poke-div-inner;
-background-image: url("../images/fire.png");
+  @extend .poke-div-inner;
+  background-image: url("../images/fire.png");
 }
 
 .poke-div-inner-flying {
-@extend .poke-div-inner;
-background-image: url("../images/flying.png");
+  @extend .poke-div-inner;
+  background-image: url("../images/flying.png");
 }
 
 .poke-div-inner-ghost {
-@extend .poke-div-inner;
-background-image: url("../images/ghost.png");
+  @extend .poke-div-inner;
+  background-image: url("../images/ghost.png");
 }
 
 .poke-div-inner-grass {
-@extend .poke-div-inner;
-background-image: url("../images/grass.png");
+  @extend .poke-div-inner;
+  background-image: url("../images/grass.png");
 }
 
 .poke-div-inner-ground {
-@extend .poke-div-inner;
-background-image: url("../images/ground.png");
+  @extend .poke-div-inner;
+  background-image: url("../images/ground.png");
 }
 
 .poke-div-inner-ice {
-@extend .poke-div-inner;
-background-image: url("../images/ice.png");
+  @extend .poke-div-inner;
+  background-image: url("../images/ice.png");
 }
 
 .poke-div-inner-normal {
-@extend .poke-div-inner;
-background-image: url("../images/normal.png");
+  @extend .poke-div-inner;
+  background-image: url("../images/normal.png");
 }
 
 .poke-div-inner-poison {
-@extend .poke-div-inner;
-background-image: url("../images/poison.png");
+  @extend .poke-div-inner;
+  background-image: url("../images/poison.png");
 }
 
 .poke-div-inner-psychic {
-@extend .poke-div-inner;
-background-image: url("../images/psychic.png");
+  @extend .poke-div-inner;
+  background-image: url("../images/psychic.png");
 }
 
 .poke-div-inner-rock {
-@extend .poke-div-inner;
-background-image: url("../images/rock.png");
+  @extend .poke-div-inner;
+  background-image: url("../images/rock.png");
 }
 
 .poke-div-inner-steel {
-@extend .poke-div-inner;
-background-image: url("../images/steel.png");
+  @extend .poke-div-inner;
+  background-image: url("../images/steel.png");
 }
 
 .poke-div-inner-water {
-@extend .poke-div-inner;
-background-image: url("../images/water.png");
+  @extend .poke-div-inner;
+  background-image: url("../images/water.png");
 }
