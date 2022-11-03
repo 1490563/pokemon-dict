@@ -21,6 +21,9 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  padding: 5px 5px 0px 5px;
+  font-size: 15px;
+  font-family: 'Cherry Swash', cursive;
 }
 
 .poke-div-inner {
@@ -33,7 +36,31 @@ body {
 .poke-name {
   display: block;
   text-align: center;
-  font-size:  25px;;
+  font-size:  25px;
+  font-family: 'Caveat', cursive;
+  font-weight: bold;
+  text-shadow: 1px 1px 2px silver;
+  font-style: italic;
+  letter-spacing: 0.2em;
+  background-image: linear-gradient(
+		70deg,
+		black 80%, /* font color */
+		#FFF 50%,
+		#dc143c 55% /* font color */
+	);
+	background-size: 500% 100%;
+	background-clip: text;
+	-webkit-background-clip: text;
+	color: transparent;
+	animation: shine 2s infinite;
+}
+@keyframes shine {
+	0% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
 }
 
 .poke-div-middle {
@@ -44,22 +71,47 @@ body {
 .poke-image-flame {
     background-color: white;
     padding: 0 20px 0 20px;
+    height: 160px;
 }
 
 .poke-image {
   width: auto;
-  height: 180px;
+  height: 160px;
 }
 
 .poke-type {
   text-align: center;
+  font-size: 20px;
+  font-family: 'Londrina Shadow', cursive;
+  font-weight: bold;
+  letter-spacing: 0.1em;
+
 }
 
 .poke-bottom {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    padding: 0px 10px;
+    font-size: 16px;
+    font-family: 'Cherry Swash', cursive;
 }
+
+.poke-text-box {
+    height: 65px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.poke-text {
+    font-size: 3px;
+    padding: 0px 5px;
+    font-family: "fantasy", cursive;
+    text-align: center;
+}
+
+
 
 .poke-div-inner-bug {
 @extend .poke-div-inner;

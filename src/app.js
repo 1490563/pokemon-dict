@@ -5,7 +5,30 @@ window.app = () => {
   pokeListDiv.id = "poke-list-div";
   main.append(pokeListDiv);
 
-  fetchPokeNameListByGeneration(2).then((pokeNameList) => {
+  // let generationNumber;
+  // if(document.getElementById("generation").value === "GenerationⅠ"){
+  //   generationNumber = 1;
+  // }else if(document.getElementById("generation").value === "GenerationⅡ"){
+  //   generationNumber = 2;
+  // }else if(document.getElementById("generation").value === "GenerationⅢ"){
+  //   generationNumber = 3;
+  // }else if(document.getElementById("generation").value === "GenerationⅣ"){
+  //   generationNumber = 4;
+  // }else if(document.getElementById("generation").value === "GenerationⅤ"){
+  //   generationNumber = 5;
+  // }else if(document.getElementById("generation").value === "GenerationⅥ"){
+  //   generationNumber = 6;
+  // }else if(document.getElementById("generation").value === "GenerationⅦ"){
+  //   generationNumber = 7;
+  // }else if(document.getElementById("generation").value === "GenerationⅧ"){
+  //   generationNumber = 8;
+  // }else {
+    
+  // };
+  // console.log(document.getElementById("generation").value);
+  // console.log(generationNumber);
+
+  fetchPokeNameListByGeneration(8).then((pokeNameList) => {
     for (const pokeName of pokeNameList) {
       fetchPoke(pokeName).then((poke) => renderPoke(poke));
     }
@@ -28,11 +51,12 @@ const renderPoke = (poke) => {
 
   const pokeGeneration = document.createElement("div");
   pokeGeneration.className = "poke-generation";
-  pokeGeneration.innerText = "###";
+  pokeGeneration.innerText = document.getElementById("generation").value;
+  // console.log(document.getElementById("generation").value)
 
   const pokeNo = document.createElement("div");
   pokeNo.className = "poke-no";
-  pokeNo.innerText = poke.id;
+  pokeNo.innerText = "No. " + poke.id;
 
   pokeHeader.append(pokeGeneration, pokeNo);
 
@@ -72,18 +96,28 @@ const renderPoke = (poke) => {
 
   const pokeHeight = document.createElement("div");
   pokeHeight.className = "poke-height";
-  pokeHeight.innerText = Number(poke.height) * 10 + " cm";
+  pokeHeight.innerText = "Height : " + Number(poke.height) / 10 + " m";
 
   const pokeWeight = document.createElement("div");
   pokeWeight.className = "poke-weight";
-  pokeWeight.innerText = Number(poke.weight) / 10 + " kg";
+  pokeWeight.innerText = "Weight : " + Number(poke.weight) / 10 + " kg";
 
   const pokeBottom = document.createElement("div");
   pokeBottom.className = "poke-bottom";
-
+  
   pokeBottom.append(pokeHeight, pokeWeight);
 
-  pokeDivBottom.append(pokeType, pokeBottom);
+  const pokeTextBox = document.createElement("div");
+  pokeTextBox.className = "poke-text-box";
+
+  const pokeText = document.createElement("div");
+  pokeText.className = "poke-text";
+
+  fetchPokeText(poke.id, pokeText);
+
+  pokeTextBox.append(pokeText);
+
+  pokeDivBottom.append(pokeType, pokeBottom, pokeTextBox);
 
   pokeDivInner.append(pokeDivUpper, pokeDivMiddle, pokeDivBottom);
   pokeDivOuter.append(pokeDivInner);
@@ -113,6 +147,7 @@ const fetchPokeNameListByGeneration = (id) => {
   return fetch(`https://pokeapi.co/api/v2/generation/${id}/`)
     .then((response) => response.json())
     .then((data) => data.pokemon_species.map((element) => element.name))
+    // .then(pokes => console.log(pokes));
     .catch((response) => response.json());
 };
 
@@ -125,4 +160,36 @@ const fetchPokeImage = (id, pokeImage) => {
       const fileURL = URL.createObjectURL(blobResponse);
       pokeImage.src = fileURL;
     });
+};
+
+const fetchPokeText = (id, pokeText) => {
+  return fetch(
+    `https://pokeapi.co/api/v2/pokemon-species/${id}/`
+  )
+    .then((response) => response.json())
+    // .then((data) => data.flavor_text_entries)
+    .then((data) => {
+      // const pokeTextsrc = data.flavor_text_entries[0].flavor_text
+      // pokeText.innerText = pokeTextsrc;
+
+      const pokeTextFlavors = data.flavor_text_entries
+      let pokeTextsrc = pokeTextFlavors
+      .filter(ele => (ele.language.name === "en") &&(ele.version.name ==="sword"));
+      if (pokeTextsrc.length === 0){
+        pokeTextsrc = pokeTextFlavors
+      .filter(ele => (ele.language.name === "en") &&(ele.version.name ==="y"));
+      }
+      if (pokeTextsrc.length === 0){
+        pokeTextsrc = pokeTextFlavors
+      .filter(ele => (ele.language.name === "en") &&(ele.version.name ==="sun"));
+      }
+      if (pokeTextsrc.length === 0){
+        pokeTextsrc = pokeTextFlavors
+      .filter(ele => (ele.language.name === "en") &&(ele.version.name ==="legends-arceus"));
+      }
+      // console.log(pokeTextsrc[0].flavor_text)
+      pokeText.innerText = pokeTextsrc[0].flavor_text.replace(/\r?\n/g,"");
+    })
+    // .then(text => console.log(text))
+    // .then(text => console.log(text));
 };
