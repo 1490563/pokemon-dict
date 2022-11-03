@@ -28,7 +28,7 @@ window.app = () => {
   // console.log(document.getElementById("generation").value);
   // console.log(generationNumber);
 
-  fetchPokeNameListByGeneration(5).then((pokeNameList) => {
+  fetchPokeNameListByGeneration(8).then((pokeNameList) => {
     for (const pokeName of pokeNameList) {
       fetchPoke(pokeName).then((poke) => renderPoke(poke));
     }
@@ -187,9 +187,8 @@ const fetchPokeText = (id, pokeText) => {
         pokeTextsrc = pokeTextFlavors
       .filter(ele => (ele.language.name === "en") &&(ele.version.name ==="legends-arceus"));
       }
-
-      console.log(pokeTextsrc[0].flavor_text)
-      pokeText.innerText = pokeTextsrc[0].flavor_text;
+      // console.log(pokeTextsrc[0].flavor_text)
+      pokeText.innerText = pokeTextsrc[0].flavor_text.replace(/\r?\n/g,"");
     })
     // .then(text => console.log(text))
     // .then(text => console.log(text));
