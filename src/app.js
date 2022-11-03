@@ -1,41 +1,66 @@
+// const { render } = require("node-sass");
+
 window.app = () => {
   const main = document.getElementById("main");
+
+  const generationSelect = createGenerationSelect(main);
+  generationSelect.addEventListener("change", (event) =>
+    onGeneratonSelectChange(event)
+  );
+
   const pokeListDiv = document.createElement("div");
   pokeListDiv.className = "poke-list-div";
   pokeListDiv.id = "poke-list-div";
   main.append(pokeListDiv);
+};
 
-  // let generationNumber;
-  // if(document.getElementById("generation").value === "GenerationⅠ"){
-  //   generationNumber = 1;
-  // }else if(document.getElementById("generation").value === "GenerationⅡ"){
-  //   generationNumber = 2;
-  // }else if(document.getElementById("generation").value === "GenerationⅢ"){
-  //   generationNumber = 3;
-  // }else if(document.getElementById("generation").value === "GenerationⅣ"){
-  //   generationNumber = 4;
-  // }else if(document.getElementById("generation").value === "GenerationⅤ"){
-  //   generationNumber = 5;
-  // }else if(document.getElementById("generation").value === "GenerationⅥ"){
-  //   generationNumber = 6;
-  // }else if(document.getElementById("generation").value === "GenerationⅦ"){
-  //   generationNumber = 7;
-  // }else if(document.getElementById("generation").value === "GenerationⅧ"){
-  //   generationNumber = 8;
-  // }else {
-    
-  // };
-  // console.log(document.getElementById("generation").value);
-  // console.log(generationNumber);
+const createGenerationSelect = (main) => {
+  const generationSelect = document.createElement("select");
+  generationSelect.className = "generation-select";
+  main.append(generationSelect);
+  fetchGenerationNameList().then((generationNameList) => {
+    generationNameList.forEach((generationName) => {
+      const option = document.createElement("option");
+      option.innerText = generationName;
+      option.value = generationName;
+      generationSelect.append(option);
+    });
+  });
+  return generationSelect;
+};
 
-  fetchPokeNameListByGeneration(8).then((pokeNameList) => {
-    for (const pokeName of pokeNameList) {
-      fetchPoke(pokeName).then((poke) => renderPoke(poke));
-    }
+const fetchGenerationNameList = () => {
+  return fetch("https://pokeapi.co/api/v2/generation/")
+    .then((response) => response.json())
+    .then((data) => data.results.map((elem) => elem.name));
+  // .then(result => console.log(result))
+};
+
+const renderPokeListByGeneration = (generationNumber) => {
+  const pokeListDiv = document.getElementById("poke-list-div");
+  while (pokeListDiv.firstChild) {
+    pokeListDiv.firstChild.remove();
+  }
+
+  fetchSpeciesListByGeneration(generationNumber).then((speciesNameList) => {
+    speciesNameList.forEach((speciesName) => {
+      fetchPokeNameListBySpecies(speciesName).then((pokeNameList) => {
+        pokeNameList.forEach((pokeName) => {
+          fetchPoke(pokeName).then((poke) =>
+            renderPoke(poke, generationNumber)
+          );
+        });
+      });
+    });
   });
 };
 
-const renderPoke = (poke) => {
+const onGeneratonSelectChange = (event) => {
+  const value = event.srcElement.value;
+  renderPokeListByGeneration(value);
+};
+
+const renderPoke = (poke, generationName) => {
   const pokeDivOuter = document.createElement("div");
   pokeDivOuter.className = "poke-div-outer";
   pokeDivOuter.id = poke.name;
@@ -51,7 +76,7 @@ const renderPoke = (poke) => {
 
   const pokeGeneration = document.createElement("div");
   pokeGeneration.className = "poke-generation";
-  pokeGeneration.innerText = document.getElementById("generation").value;
+  pokeGeneration.innerText = generationName;
   // console.log(document.getElementById("generation").value)
 
   const pokeNo = document.createElement("div");
@@ -104,7 +129,7 @@ const renderPoke = (poke) => {
 
   const pokeBottom = document.createElement("div");
   pokeBottom.className = "poke-bottom";
-  
+
   pokeBottom.append(pokeHeight, pokeWeight);
 
   const pokeTextBox = document.createElement("div");
@@ -143,53 +168,76 @@ const fetchPoke = (idOrName) => {
     .catch((response) => console.log(response));
 };
 
-const fetchPokeNameListByGeneration = (id) => {
+const fetchSpeciesListByGeneration = (id) => {
   return fetch(`https://pokeapi.co/api/v2/generation/${id}/`)
     .then((response) => response.json())
     .then((data) => data.pokemon_species.map((element) => element.name))
-    // .then(pokes => console.log(pokes));
     .catch((response) => response.json());
+};
+
+const fetchPokeNameListBySpecies = (speciesName) => {
+  return fetch(`https://pokeapi.co/api/v2/pokemon-species/${speciesName}/`)
+    .then((response) => response.json())
+    .then((data) => {
+      const result = [];
+      data.varieties.forEach((variety) => {
+        result.push(variety.pokemon.name);
+      });
+      return result;
+    });
 };
 
 const fetchPokeImage = (id, pokeImage) => {
   return fetch(
     `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${id}.png`
   )
-    .then((response) => response.blob())
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error(response.statusText);
+      }
+      return response.blob();
+    })
     .then((blobResponse) => {
       const fileURL = URL.createObjectURL(blobResponse);
       pokeImage.src = fileURL;
+    })
+    .catch((response) => {
+      pokeImage.src = "../images/no_image.png";
     });
 };
 
 const fetchPokeText = (id, pokeText) => {
-  return fetch(
-    `https://pokeapi.co/api/v2/pokemon-species/${id}/`
-  )
-    .then((response) => response.json())
-    // .then((data) => data.flavor_text_entries)
-    .then((data) => {
-      // const pokeTextsrc = data.flavor_text_entries[0].flavor_text
-      // pokeText.innerText = pokeTextsrc;
-
-      const pokeTextFlavors = data.flavor_text_entries
-      let pokeTextsrc = pokeTextFlavors
-      .filter(ele => (ele.language.name === "en") &&(ele.version.name ==="sword"));
-      if (pokeTextsrc.length === 0){
-        pokeTextsrc = pokeTextFlavors
-      .filter(ele => (ele.language.name === "en") &&(ele.version.name ==="y"));
+  return fetch(`https://pokeapi.co/api/v2/pokemon-species/${id}/`)
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error(response.statusText);
       }
-      if (pokeTextsrc.length === 0){
-        pokeTextsrc = pokeTextFlavors
-      .filter(ele => (ele.language.name === "en") &&(ele.version.name ==="sun"));
-      }
-      if (pokeTextsrc.length === 0){
-        pokeTextsrc = pokeTextFlavors
-      .filter(ele => (ele.language.name === "en") &&(ele.version.name ==="legends-arceus"));
-      }
-      // console.log(pokeTextsrc[0].flavor_text)
-      pokeText.innerText = pokeTextsrc[0].flavor_text.replace(/\r?\n/g,"");
+      return response.json();
     })
-    // .then(text => console.log(text))
-    // .then(text => console.log(text));
+    .then((data) => {
+      const pokeTextFlavors = data.flavor_text_entries;
+      let pokeTextsrc = pokeTextFlavors.filter(
+        (ele) => ele.language.name === "en" && ele.version.name === "sword"
+      );
+      if (pokeTextsrc.length === 0) {
+        pokeTextsrc = pokeTextFlavors.filter(
+          (ele) => ele.language.name === "en" && ele.version.name === "y"
+        );
+      }
+      if (pokeTextsrc.length === 0) {
+        pokeTextsrc = pokeTextFlavors.filter(
+          (ele) => ele.language.name === "en" && ele.version.name === "sun"
+        );
+      }
+      if (pokeTextsrc.length === 0) {
+        pokeTextsrc = pokeTextFlavors.filter(
+          (ele) =>
+            ele.language.name === "en" && ele.version.name === "legends-arceus"
+        );
+      }
+      pokeText.innerText = pokeTextsrc[0].flavor_text.replace(/\r?\n/g, "");
+    })
+    .catch((response) => {
+      console.log(response);
+    });
 };
