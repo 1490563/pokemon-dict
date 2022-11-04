@@ -7,7 +7,7 @@
     "lib": "lib"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "./node_modules/mocha/bin/mocha",
     "node-sass": "./node_modules/node-sass/bin/node-sass"
   },
   "repository": {
@@ -21,6 +21,8 @@
   },
   "homepage": "https://github.com/1490563/pokemon-dict#readme",
   "dependencies": {
+    "chai": "^4.3.6",
+    "mocha": "^10.1.0",
     "node-sass": "^7.0.3",
     "prettier": "^2.7.1"
   },
