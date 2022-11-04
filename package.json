@@ -21,6 +21,10 @@
   },
   "homepage": "https://github.com/1490563/pokemon-dict#readme",
   "dependencies": {
-    "node-sass": "^7.0.3"
+    "node-sass": "^7.0.3",
+    "prettier": "^2.7.1"
+  },
+  "devDependencies": {
+    "eslint": "^8.26.0"
   }
 }

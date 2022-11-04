@@ -1,5 +1,3 @@
-// const { render } = require("node-sass");
-
 window.app = () => {
   const main = document.getElementById("main");
 
@@ -16,28 +14,19 @@ window.app = () => {
   );
 };
 
-// const createGenerationButton = (side) => {
-//   const generationButton = document.createElement("div");
-//   generationButton.className = "generation-button";
-
-//   side.append(generationButton);
-// }
-
-
 const createGenerationSelect = (main) => {
-  // const generationSelect = document.createElement("select");
   const generationSelect = document.createElement("div");
   generationSelect.className = "generation-select";
   main.append(generationSelect);
   fetchGenerationNameList().then((generationNameList) => {
     generationNameList.forEach((generationName) => {
-      // const option = document.createElement("option");
       const geneNameOfP = document.createElement("p");
-      geneNameOfP.className = "gene-name-of-p"
+      geneNameOfP.className = "gene-name-of-p";
       geneNameOfP.innerText = generationName.toUpperCase();
       geneNameOfP.value = generationName;
-      geneNameOfP.addEventListener ("click", (event)=>
-      onGeneratonSelectChange(event)); 
+      geneNameOfP.addEventListener("click", (event) =>
+        onGeneratonSelectChange(event)
+      );
       generationSelect.append(geneNameOfP);
     });
   });
@@ -48,7 +37,6 @@ const fetchGenerationNameList = () => {
   return fetch("https://pokeapi.co/api/v2/generation/")
     .then((response) => response.json())
     .then((data) => data.results.map((elem) => elem.name));
-  // .then(result => console.log(result))
 };
 
 const renderPokeListByGeneration = (generationNumber) => {
@@ -92,7 +80,6 @@ const renderPoke = (poke, generationName) => {
   const pokeGeneration = document.createElement("div");
   pokeGeneration.className = "poke-generation";
   pokeGeneration.innerText = generationName.toUpperCase();
-  // console.log(document.getElementById("generation").value)
 
   const pokeNo = document.createElement("div");
   pokeNo.className = "poke-no";
@@ -252,7 +239,8 @@ const fetchPokeText = (id, pokeText) => {
       }
       pokeText.innerText = pokeTextsrc[0].flavor_text.replace(/\r?\n/g, "");
     })
-    .catch((response) => {
-      console.log(response);
+    .catch(() => {
+      pokeText.innerText =
+        "Sorry...Nothing Introduction. \n This is super rare Pokemon. \n Please tell me this Pokemon's characteristics.";
     });
 };
